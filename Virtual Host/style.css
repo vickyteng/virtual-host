@@ -807,13 +807,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 .read_more {
   color: #6e6e6e;
-  display: block;
-  float: right;
-  margin-right: 15px;
+  display: inline;
+  float: none;
+  font-size: 20px;
+  margin-right: 18px;
   min-height: 22px;
 }
 .read_more>i{
-  margin-left: 5px;
+  margin-left: 18px;
 }
 
 /*--------------------*/
@@ -828,7 +829,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .howworks_area {
   display: inline;
   float: left;
-  padding: 60px 0 105px;
+  padding: 60px 0 0px;
   width: 100%;
 }
 .howworks_slider {
@@ -1726,7 +1727,7 @@ transition: all 0.5s;
   .testimon_nav li {margin-left: 32px;}
   .howworks_slider {padding-left: 0;}
   .slider_area {width: 100%;}
-  .service_nav li {margin-left: 12px;min-height: 522px;padding: 0 10px;}
+  .service_nav li {margin-left: 12px;text-align: center;min-height: 522px;padding: 0 10px;}
   .archiveblog_right {width: 70%;}
   .page_left {width: 100%;}
 }
