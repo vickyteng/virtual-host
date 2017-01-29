@@ -829,49 +829,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .howworks_area {
   display: inline;
   float: left;
-  padding: 60px 0 0px;
+  padding-top: 60px;
   width: 100%;
-}
-.howworks_slider {
-  display: inline;
-  float: left;
-  min-height: 100px;
-  padding-left: 35px;
-  width: 100%;
-  margin-top: 40px;
-}
-.howworks_featured {
-  display: inline;
-  float: left;
-  width: 100%;
-  margin-top: 40px;
-}
-.slider_area{
-  background-image: url(img/works_sliderbg.png);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 100% 100%;
-  width: 480px;
-  height: 420px;
-  float: left;
-  display: block;
 }
 .slick_slider{
   float: left;
   display: inline;
   width: 100%;
-}
-.single_iteam {
-  display: inline;
-  float: left;
-  height: 328px;
-  overflow: hidden;
-  padding: 24px;
-  width: 100%;
-}
-.single_iteam img{
-  width: 100%;
-  height: 100%;
 }
 .slick-dots li button:before {
   content: "";
@@ -880,27 +844,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   color: #fff;
   opacity: 1;
 }
-.slick-dots {
-  bottom: -130px;
-}
-.slick-dots li.slick-active button:before {
-  opacity: 1;
-}
-.howworks_featured .media-left{
-  vertical-align: top;
-  font-size: 16px;
-}
-.featured_btn {
-  display: inline-block;
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-size: 15px;
-  margin-top: 50px;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-}
-
 /*--------------------*/
 /* Home Team Section */
 /*--------------------*/
