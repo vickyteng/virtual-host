@@ -12,7 +12,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- for fontawesome icon css file -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- superslides css -->
     <link rel="stylesheet" href="css/superslides.css">
     <!-- for content animate css file -->
@@ -57,9 +57,7 @@ AWS.config.update({
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 function createItem() {
-
-
-/* new stuf */
+/* new stuff */
 var x = document.getElementById("frm1");
     var text = "";
     var i = 0;
@@ -76,16 +74,18 @@ var x = document.getElementById("frm1");
         TableName :"HouseItems",
         Item:{
             "name": item_name,
-            "information": item_info,
-
+            "information": item_name,
+            /*"extra":{ */
+              "detail1": item_info
+            /* } */
+            ,
         }
     };
+
 
 /*
     document.getElementById("demo").innerHTML = text;
 */
-/*end new stuff */
-
     docClient.put(params, function(err, data) {
         if (err) {
             document.getElementById('textarea').innerHTML = "Unable to add item: " + "\n" + JSON.stringify(err, undefined, 2);
@@ -93,6 +93,91 @@ var x = document.getElementById("frm1");
             document.getElementById('textarea').innerHTML = "PutItem succeeded: " + "\n" + JSON.stringify(data, undefined, 2);
         }
     });
+}
+
+
+function updateItem() {
+
+  var y = document.getElementById("frm2");
+   var table = "HouseItems";
+    var j = 0;
+    var item_name2 = y.elements[j].value;
+    j++;
+    var item_info2 = y.elements[j].value;
+
+    var params = {
+        TableName:table,
+        Key:{
+            "name": item_name2,
+
+            "information": item_name2
+            /*
+            "information": item_info2 */
+        },
+        UpdateExpression: "set detail1 = :r",
+        ExpressionAttributeValues:{
+            ":r":item_info2
+        },
+        ReturnValues:"UPDATED_NEW"
+    };
+
+    docClient.update(params, function(err, data) {
+        if (err) {
+            document.getElementById('textarea').innerHTML = "Unable to update item: " + "\n" + JSON.stringify(err, undefined, 2);
+        } else {
+            document.getElementById('textarea').innerHTML = "UpdateItem succeeded: " + "\n" + JSON.stringify(data, undefined, 2);
+        }
+    });
+}
+
+
+
+function scanData() {
+    document.getElementById('textarea').innerHTML += "Scanning HouseItems table." + "\n";
+
+    var params = {
+        TableName: "HouseItems",
+        ProjectionExpression: "information, detail1",
+        /*FilterExpression: "", #yr between :start_yr and :end_yr */
+        /*ExpressionAttributeNames: {
+            "#yr": "year",
+        },
+        ExpressionAttributeValues: {
+           ":start_yr": 1950,
+            ":end_yr": 1959
+        }*/
+    };
+
+    docClient.scan(params, onScan);
+
+    function onScan(err, data) {
+
+      var listing = "";
+        if (err) {
+            document.getElementById('textarea').innerHTML += "Unable to scan the table: " + "\n" + JSON.stringify(err, undefined, 2);
+        } else {
+            // Print all the movies
+            document.getElementById('textarea').innerHTML += "Scan succeeded. " + "\n";
+            data.Items.forEach(function(movie) {
+                listing += "<pre>" + "<b>" +  movie.information + "</b>" + ": " + movie.detail1 +  "\n" + "</pre>";
+
+               document.getElementById("demo").innerHTML = listing + "\n";
+              /*
+                document.getElementById('textarea').innerHTML += movie.information + ": " + movie.detail1 +  "\n";
+                */
+            }
+            );
+
+            //
+            /* Continue scanning if we have more movies (per scan 1MB limitation)
+            document.getElementById('textarea').innerHTML += "Scanning for more..." + "\n";
+            params.ExclusiveStartKey = data.LastEvaluatedKey;
+            docClient.scan(params, onScan);
+            */
+        }
+
+
+    }
 }
 
 </script>
@@ -160,6 +245,14 @@ var x = document.getElementById("frm1");
             </div>
             <div class="row">
             <p align="center"> Add information about common household details, objects and rules! Some examples include house rules, location of the bathroom, emergency phone numbers, etc.</p>
+            <br>
+
+ <p align="center">For example, a guest may wonder where the nearest bathroom is. So, with "Bathroom" as the item, the information could be "The location of the bathroom is past the kitchen at the end of the hall".</p>
+
+  <br>
+<p align="center">Another example would be "House Rules" and what guests can and cannot do - i.e. no smoking, clean up after yourself, etc.</p>
+
+
 
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="contact_left wow fadeInLeft">
@@ -169,14 +262,37 @@ var x = document.getElementById("frm1");
 
                     <input type="text" id="information"
                     class="form-control wpcf7-text" placeholder="What information about it would you like to include?">
+
+
+                  </form>
+
+                  <input id="createItem" type="button" value="Create Item" class="wpcf7-submit photo-submit" onclick="createItem();" />
+                        <br><br><br><br><br>
+
+
+
+                        <!-- Form 2: Update Items-->
+                <form class="submitphoto_form" id="frm2">
+
+                  <input type="text" id="item" class="form-control wpcf7-text" placeholder="What is the item's name?">
+
+                    <input type="text" id="information"
+                    class="form-control wpcf7-text" placeholder="What NEW information do you want to include?">
                     <p id="demo"></p>
 
                   </form>
 
 
-                  <input id="createItem" type="button" value="Create Item" class="wpcf7-submit photo-submit" onclick="createItem();" />
+
+                  <input id="updateItem" type="button" value="Update Item" class="wpcf7-submit photo-submit" onclick="updateItem();" />
+                        <br><br><br>
+
+
+                        <input id="scanData" type="button" value="List All Items" class="wpcf7-submit photo-submit" onclick="scanData();" />
                         <br><br>
-                      <textarea readonly id= "textarea" style="width:100px; height:100px"></textarea>
+                          <p id="demo"></p>
+
+                      <textarea readonly id= "textarea" style="width:400px; height:100px"></textarea>
 
                       <p id="demo"></p>
 

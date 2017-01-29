@@ -11,7 +11,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- for fontawesome icon css file -->
+    <!-- for fontawesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- superslides css -->
     <link rel="stylesheet" href="css/superslides.css">
@@ -57,7 +57,9 @@ AWS.config.update({
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 function createItem() {
-/* new stuff */
+
+
+/* new stuf */
 var x = document.getElementById("frm1");
     var text = "";
     var i = 0;
@@ -74,18 +76,16 @@ var x = document.getElementById("frm1");
         TableName :"HouseItems",
         Item:{
             "name": item_name,
-            "information": item_name,
-            /*"extra":{ */
-              "detail1": item_info
-            /* } */
-            ,
+            "information": item_info,
+            "detail1": item_info,
         }
     };
-
 
 /*
     document.getElementById("demo").innerHTML = text;
 */
+/*end new stuff */
+
     docClient.put(params, function(err, data) {
         if (err) {
             document.getElementById('textarea').innerHTML = "Unable to add item: " + "\n" + JSON.stringify(err, undefined, 2);
@@ -129,7 +129,6 @@ function updateItem() {
         }
     });
 }
-
 
 
 function scanData() {
@@ -180,6 +179,7 @@ function scanData() {
     }
 }
 
+
 </script>
 
 
@@ -217,6 +217,7 @@ function scanData() {
           <li class="active"><a href="index.html">Home</a></li>
           <li><a href="contact.html">Sign Up</a></li>
           <li><a href="questions.html">Your Account</a></li>
+          <li><a href="faq.html">FAQ</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -228,9 +229,7 @@ function scanData() {
   <section id="contact">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-        <div class="contact_map">
-          <!-- Start Google map -->
-          <div id="map_canvas"></div>
+        <div class="contact_area">
         </div>
       </div>
     </div>
@@ -244,57 +243,54 @@ function scanData() {
 
             </div>
             <div class="row">
-            <p align="center"> Add information about common household details, objects and rules! Some examples include house rules, location of the bathroom, emergency phone numbers, etc.</p>
-            <br>
+                <p align="center"> Add information about common household details, objects and rules! Some examples include house rules, location of the bathroom, emergency phone numbers, etc.</p>
+                <br>
 
- <p align="center">For example, a guest may wonder where the nearest bathroom is. So, with "Bathroom" as the item, the information could be "The location of the bathroom is past the kitchen at the end of the hall".</p>
+                <p align="center">For example, a guest may wonder where the nearest bathroom is. So, with "Bathroom" as the item, the information could be "The location of the bathroom is past the kitchen at the end of the hall".</p>
 
-  <br>
-<p align="center">Another example would be "House Rules" and what guests can and cannot do - i.e. no smoking, clean up after yourself, etc.</p>
-
-
+                <br>
+                <p align="center">Another example would be "House Rules" and what guests can and cannot do - i.e. no smoking, clean up after yourself, etc.</p>
 
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="contact_left wow fadeInLeft">
-                  <form class="submitphoto_form" id="frm1">
+                    <form class="submitphoto_form" id="frm1">
 
-                  <input type="text" id="item" class="form-control wpcf7-text" placeholder="What is the item's name?">
+                    <input type="text" id="item" class="form-control wpcf7-text" placeholder="What is the item's name?">
 
                     <input type="text" id="information"
-                    class="form-control wpcf7-text" placeholder="What information about it would you like to include?">
+                      class="form-control wpcf7-text" placeholder="What information about it would you like to include?">
 
 
-                  </form>
+                    </form>
+
 
                   <input id="createItem" type="button" value="Create Item" class="wpcf7-submit photo-submit" onclick="createItem();" />
                         <br><br><br><br><br>
+                      <textarea readonly id= "textarea" style="width:100px; height:100px"></textarea>
 
+                      <!-- Form 2: Update Items-->
+                      <form class="submitphoto_form" id="frm2">
 
+                      <input type="text" id="item" class="form-control wpcf7-text" placeholder="What is the item's name?">
 
-                        <!-- Form 2: Update Items-->
-                <form class="submitphoto_form" id="frm2">
-
-                  <input type="text" id="item" class="form-control wpcf7-text" placeholder="What is the item's name?">
-
-                    <input type="text" id="information"
-                    class="form-control wpcf7-text" placeholder="What NEW information do you want to include?">
-                    <p id="demo"></p>
-
-                  </form>
-
-
-
-                  <input id="updateItem" type="button" value="Update Item" class="wpcf7-submit photo-submit" onclick="updateItem();" />
-                        <br><br><br>
-
-
-                        <input id="scanData" type="button" value="List All Items" class="wpcf7-submit photo-submit" onclick="scanData();" />
-                        <br><br>
-                          <p id="demo"></p>
-
-                      <textarea readonly id= "textarea" style="width:400px; height:100px"></textarea>
-
+                      <input type="text" id="information"
+                      class="form-control wpcf7-text" placeholder="What NEW information do you want to include?">
                       <p id="demo"></p>
+
+                      </form>
+
+                      <input id="updateItem" type="button" value="Update Item" class="wpcf7-submit photo-submit" onclick="updateItem();" />
+                            <br><br><br>
+
+
+                            <input id="scanData" type="button" value="List All Items" class="wpcf7-submit photo-submit" onclick="scanData();" />
+                            <br><br>
+                              <p id="demo"></p>
+
+                          <textarea readonly id= "textarea" style="width:400px; height:100px"></textarea>
+
+                          <p id="demo"></p>
+                      <!-- end -->
 
                 </div>
               </div>
@@ -379,10 +375,10 @@ function scanData() {
   <script src="js/jquery.superslides.min.js" type="text/javascript" charset="utf-8"></script>
   <!-- slick slider js file -->
   <script src="js/slick.min.js"></script>
-  <!-- Google map -->
+  <!-- Google map
   <script src="https://maps.googleapis.com/maps/api/js"></script>
   <script src="js/jquery.ui.map.js"></script>
-
+-->
 
   <!-- custom js file include -->
   <script src="js/custom.js"></script>
