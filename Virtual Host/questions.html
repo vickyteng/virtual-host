@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,12 +36,76 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
     <![endif]-->
+
+
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script>
+
+<script>
+AWS.config.update({
+  region: "us-east-1",
+  endpoint: 'dynamodb.us-east-1.amazonaws.com',
+  // accessKeyId default can be used while using the downloadable version of DynamoDB. 
+  // For security reasons, do not store AWS Credentials in your files. Use Amazon Cognito instead.
+  accessKeyId: "AKIAJ34HNS64UTACTHTQ",
+  // secretAccessKey default can be used while using the downloadable version of DynamoDB. 
+  // For security reasons, do not store AWS Credentials in your files. Use Amazon Cognito instead.
+  secretAccessKey: "U1Q/OzA8z1gQoY08sdqIiZioF5Rqw53JUbmEvbOB"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+
+function createItem() {
+    
+
+/* new stuf */
+var x = document.getElementById("frm1");
+    var text = "";
+    var i = 0;
+    var item_name = x.elements[i].value;
+    i++;
+    var item_info = x.elements[i].value;
+   
+   /* for (i = 0; i < x.length ;i++) {
+        text += x.elements[i].value + "<br>";
+    }
+    */
+
+    var params = {
+        TableName :"HouseItems",
+        Item:{
+            "name": item_name,
+            "information": item_info,
+            
+        }
+    };
+
+/*
+    document.getElementById("demo").innerHTML = text;
+*/
+/*end new stuff */
+
+    docClient.put(params, function(err, data) {
+        if (err) {
+            document.getElementById('textarea').innerHTML = "Unable to add item: " + "\n" + JSON.stringify(err, undefined, 2);
+        } else {
+            document.getElementById('textarea').innerHTML = "PutItem succeeded: " + "\n" + JSON.stringify(data, undefined, 2);
+        }
+    });
+}
+
+</script>
+
+
   </head>
 <body>
   <!-- =========================
     //////////////This Theme Design and Developed //////////////////////
     //////////// by www.wpfreeware.com======================-->
+
+
+
 
   <!-- Preloader -->
   <div id="preloader">
@@ -83,6 +150,7 @@
     
 
 
+
   <!-- start Contact section -->
   <section id="contact">
     <div class="row">
@@ -103,16 +171,22 @@
 
             </div>
             <div class="row">
-            <p align="center"> Answer some common questions that will help your guests!</p>
+            <p align="center"> Add information about common household details, objects and rules! Some examples include house rules, location of the bathroom, emergency phone numbers, etc.</p>
 
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="contact_left wow fadeInLeft">
-                  <form class="submitphoto_form">
+                  <form class="submitphoto_form" id="frm1">
 
-                  <input type="text" class="form-control wpcf7-text" placeholder="What are the house rules?">
+                  <input type="text" id="item" class="form-control wpcf7-text" placeholder="What is the item's name?">
                     
-                    <input type="text" class="form-control wpcf7-text" placeholder="Where is your bathroom located?">
+                    <input type="text" id="information"
+                    class="form-control wpcf7-text" placeholder="What information about it would you like to include?">
                     
+
+                    <p id="demo"></p>
+
+
+                    <!--
                     <input type="text" class="form-control wpcf7-text" placeholder="Where is the kitchen located?"> 
                      
                     <input type="text" class="form-control wpcf7-text" placeholder="Where are the garbage bags located?"> 
@@ -120,7 +194,7 @@
                     <input type="text" class="form-control wpcf7-text" placeholder="How do I start the dishwasher?"> 
 
                     <input type="text" class="form-control wpcf7-text" placeholder="How do I start the dishwasher?"> 
-
+                  -->
 
 
                     <!--         
@@ -129,10 +203,20 @@
                     <!--
                     <textarea class="form-control wpcf7-textarea" cols="30" rows="10" placeholder="What would you like to tell us"></textarea>
                     -->
-                    <input type="submit" value="Sign Up" class="wpcf7-submit photo-submit">  
-
-
+                    <!--
+                    <input type="submit" value="Create Item" class="wpcf7-submit photo-submit">  
+                    -->
                   </form>
+
+
+                  <input id="createItem" type="button" value="Create Item" class="wpcf7-submit photo-submit" onclick="createItem();" />
+                        <br><br>
+                      <textarea readonly id= "textarea" style="width:100px; height:100px"></textarea>
+
+                      <p id="demo"></p>
+
+
+
                 </div>                  
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6">
@@ -140,8 +224,8 @@
                   <img src="img/echo.png" alt="img">
                   <p>Say hello! We want to hear about what you have to say. We are open to feedback and any questions you may have.</p>
                   <address>
-                    <p><a href="mailto:hello@yourdomain.com"> hello@yourdomain.com</a></p>
-                    <p> 415 425 4149</p>
+                    <p><a href="mailto:hello@yourdomain.com"> hello@VirtualHost.com</a></p>
+                    <p> (301) 310 - 2990 </p>
                   </address>
                 </div>
               </div>
@@ -151,6 +235,23 @@
       </div>
     </div>
   </section>
+
+<!--
+/*
+ for (i = 0; i < name3.length ;i++) {
+        text += name3.elements[i].value + "<br>";
+    }
+
+
+
+
+    document.getElementById("demo").innerHTML = text;
+*/
+
+-->
+
+  
+
   <!-- End Contact section -->
       
   <!-- start footer -->
