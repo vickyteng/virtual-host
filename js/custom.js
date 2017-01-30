@@ -1,21 +1,19 @@
-<<<<<<< HEAD
- 
- /**  
-  * WpF BGness 
+  /**
+  * WpF BGness
   * Template Scripts
   * Created by WpFreeware Team
   *Author Uri : http://www.wpfreeware.com/
 
   Custom JS
-  
+
   1. Dropdown Menu
   2. Superslides Slider
   3. Slick Slider
   4. Google Map
   5. ScrollTop
   6. Wow animation
-  7. Preloader   
-  
+  7. Preloader
+
 **/
 
  jQuery(function($){
@@ -38,7 +36,7 @@
    $('#slides').superslides({
       animation: 'fade'
     });
-  
+
   /* ----------------------------------------------------------- */
   /*  3. Slick Slider
   /* ----------------------------------------------------------- */
@@ -46,16 +44,16 @@
 
   $('.slick_slider').slick({
     dots: true,
-    infinite: true,      
+    infinite: true,
     speed: 800,
-    arrows:false,      
+    arrows:false,
     slidesToShow: 1,
     slide: 'div',
     autoplay: true,
     fade: true,
     autoplaySpeed: 5000,
     cssEase: 'linear'
-  }); 
+  });
 
 // team slider call
 
@@ -64,7 +62,7 @@ $('.team_nav').slick({
   infinite: false,
   speed: 300,
   slidesToShow: 4,
-  arrows:false,  
+  arrows:false,
   slidesToScroll: 4,
   slide: 'li',
   responsive: [
@@ -112,7 +110,7 @@ $('.team_nav').slick({
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true,        
+        infinite: true,
       }
     },
     {
@@ -140,7 +138,7 @@ $('.team_nav').slick({
 /* ----------------------------------------------------------- */
 
 var zoom= $('#map_canvas').gmap('option', 'zoom');
-  
+
 $('#map_canvas').gmap().bind('init', function(ev, map) {
   $('#map_canvas').gmap('addMarker', {'position': '57.7973433,12.0502107', 'bounds': true});
   $('#map_canvas').gmap('option', 'zoom', 13);
@@ -162,7 +160,7 @@ $(window).scroll(function(){
     $('.scrollToTop').fadeOut();
   }
 });
- 
+
 //Click event to scroll to top
 
 $('.scrollToTop').click(function(){
@@ -202,24 +200,22 @@ wow.init();
 
 
 
-=======
- 
- /**  
-  * WpF BGness 
+ /**
+  * WpF BGness
   * Template Scripts
   * Created by WpFreeware Team
   *Author Uri : http://www.wpfreeware.com/
 
   Custom JS
-  
+
   1. Dropdown Menu
   2. Superslides Slider
   3. Slick Slider
   4. Google Map
   5. ScrollTop
   6. Wow animation
-  7. Preloader   
-  
+  7. Preloader
+
 **/
 
  jQuery(function($){
@@ -242,7 +238,7 @@ wow.init();
    $('#slides').superslides({
       animation: 'fade'
     });
-  
+
   /* ----------------------------------------------------------- */
   /*  3. Slick Slider
   /* ----------------------------------------------------------- */
@@ -250,16 +246,16 @@ wow.init();
 
   $('.slick_slider').slick({
     dots: true,
-    infinite: true,      
+    infinite: true,
     speed: 800,
-    arrows:false,      
+    arrows:false,
     slidesToShow: 1,
     slide: 'div',
     autoplay: true,
     fade: true,
     autoplaySpeed: 5000,
     cssEase: 'linear'
-  }); 
+  });
 
 // team slider call
 
@@ -268,7 +264,7 @@ $('.team_nav').slick({
   infinite: false,
   speed: 300,
   slidesToShow: 4,
-  arrows:false,  
+  arrows:false,
   slidesToScroll: 4,
   slide: 'li',
   responsive: [
@@ -316,7 +312,7 @@ $('.team_nav').slick({
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true,        
+        infinite: true,
       }
     },
     {
@@ -344,7 +340,7 @@ $('.team_nav').slick({
 /* ----------------------------------------------------------- */
 
 var zoom= $('#map_canvas').gmap('option', 'zoom');
-  
+
 $('#map_canvas').gmap().bind('init', function(ev, map) {
   $('#map_canvas').gmap('addMarker', {'position': '57.7973433,12.0502107', 'bounds': true});
   $('#map_canvas').gmap('option', 'zoom', 13);
@@ -366,7 +362,7 @@ $(window).scroll(function(){
     $('.scrollToTop').fadeOut();
   }
 });
- 
+
 //Click event to scroll to top
 
 $('.scrollToTop').click(function(){
@@ -403,7 +399,3 @@ wow.init();
     $('body').delay(100).css({'overflow':'visible'});
   })
 //]]>
-
-
-
->>>>>>> 23a49d12e859319a3db3f07e7beec11facb62e64
